@@ -2,6 +2,10 @@ const http = require('http')
 
 function requestHandler(request, response){
    console.log(request.url)
+
+   if(request.url='/'){
+    response.end("Hello Homie")
+   }
 }
 
 const server = http.createServer(requestHandler)
