@@ -4,7 +4,8 @@ function requestHandler(request, response){
    console.log(request.url)
 
    if(request.url='/'){
-    response.end("Hello Homie")
+    response.writeHead(200, {'content-type':'text/html'})
+    response.end("<h1>Hello Homie</h1>")
    }
 }
 
