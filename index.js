@@ -10,10 +10,34 @@ function requestHandler(request, response){
 //     response.end("<h1>Hello Homie</h1>")
 //    }
 
-    fs.readFile('./index.html',(err,data)=>{
+    // fs.readFile('./index.html',(err,data)=>{
+    //     if(err){
+    //         return response.end("<h1>Error</h1>")
+    //     }else{
+    //         response.writeHead(200, {'content-type':'text/html'})
+    //         return response.end(data)
+    //     }
+    // })
+
+    let filePath = ''
+
+    switch(request.url) {
+        case '/':
+            filePath = "./index.html"
+            break;
+        case '/profile':
+            filePath = "./profile.html"
+            break;
+        default : 
+            filePath = "./error.html"
+            break
+    }
+
+    fs.readFile(filePath,(err,data)=>{
         if(err){
             return response.end("<h1>Error</h1>")
         }else{
+            response.writeHead(200, {'content-type':'text/html'})
             return response.end(data)
         }
     })
@@ -26,6 +50,6 @@ server.listen(8080, function(err){
         console.log("Error is",err)
         return
     }else{
-        console.log("This server is running on port ",port)
+        console.log("This server live on port ",port)
     }
 })
